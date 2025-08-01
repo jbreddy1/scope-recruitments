@@ -217,6 +217,22 @@ function validateForm() {
         isValid = false;
     }
 
+    // Dynamic club question validation
+    const awsPreference = document.querySelector('input[name="awsClubPreference"]:checked')?.value;
+    if (awsPreference === 'yes') {
+        const whyAwsTextarea = document.getElementById('whyAwsClub');
+        if (whyAwsTextarea && !whyAwsTextarea.value.trim()) {
+            showFieldError(whyAwsTextarea, 'Please tell us why you want to join AWS Club');
+            isValid = false;
+        }
+    } else if (awsPreference === 'no') {
+        const whyScopeTextarea = document.getElementById('whyScope');
+        if (whyScopeTextarea && !whyScopeTextarea.value.trim()) {
+            showFieldError(whyScopeTextarea, 'Please tell us why you want to join SCOPE Club');
+            isValid = false;
+        }
+    }
+
     // CGPA validation
     const cgpaInput = document.getElementById('cgpa');
     if (cgpaInput.value) {
@@ -393,9 +409,16 @@ async function submitApplication() {
             cgpa: document.getElementById('cgpa').value,
             backlogs: document.getElementById('backlogs').value,
             department: document.getElementById('department').value,
-            whyScope: document.getElementById('whyScope').value,
             awsClubPreference: document.querySelector('input[name="awsClubPreference"]:checked')?.value
         };
+
+        // Add dynamic club question based on preference
+        const awsPreference = formData.awsClubPreference;
+        if (awsPreference === 'yes') {
+            formData.whyAwsClub = document.getElementById('whyAwsClub').value;
+        } else if (awsPreference === 'no') {
+            formData.whyScope = document.getElementById('whyScope').value;
+        }
 
         console.log('Form data collected:', formData);
 
@@ -671,4 +694,69 @@ function hideAllDepartmentQuestions() {
     allDepartmentQuestions.forEach(section => {
         section.style.display = 'none';
     });
+}
+
+// Toggle club questions based on AWS preference
+function toggleClubQuestions() {
+    const awsPreference = document.querySelector('input[name="awsClubPreference"]:checked')?.value;
+    const awsClubQuestion = document.getElementById('awsClubQuestion');
+    const scopeClubQuestion = document.getElementById('scopeClubQuestion');
+    
+    // Hide both questions first
+    if (awsClubQuestion) {
+        awsClubQuestion.classList.add('hidden');
+        setTimeout(() => {
+            awsClubQuestion.style.display = 'none';
+        }, 400);
+    }
+    
+    if (scopeClubQuestion) {
+        scopeClubQuestion.classList.add('hidden');
+        setTimeout(() => {
+            scopeClubQuestion.style.display = 'none';
+        }, 400);
+    }
+    
+    // Show appropriate question based on selection
+    if (awsPreference === 'yes') {
+        setTimeout(() => {
+            if (awsClubQuestion) {
+                awsClubQuestion.style.display = 'block';
+                awsClubQuestion.classList.remove('hidden');
+                awsClubQuestion.classList.add('showing');
+                
+                // Make AWS question required
+                const whyAwsTextarea = document.getElementById('whyAwsClub');
+                if (whyAwsTextarea) {
+                    whyAwsTextarea.required = true;
+                }
+                
+                // Remove required from SCOPE question
+                const whyScopeTextarea = document.getElementById('whyScope');
+                if (whyScopeTextarea) {
+                    whyScopeTextarea.required = false;
+                }
+            }
+        }, 450);
+    } else if (awsPreference === 'no') {
+        setTimeout(() => {
+            if (scopeClubQuestion) {
+                scopeClubQuestion.style.display = 'block';
+                scopeClubQuestion.classList.remove('hidden');
+                scopeClubQuestion.classList.add('showing');
+                
+                // Make SCOPE question required
+                const whyScopeTextarea = document.getElementById('whyScope');
+                if (whyScopeTextarea) {
+                    whyScopeTextarea.required = true;
+                }
+                
+                // Remove required from AWS question
+                const whyAwsTextarea = document.getElementById('whyAwsClub');
+                if (whyAwsTextarea) {
+                    whyAwsTextarea.required = false;
+                }
+            }
+        }, 450);
+    }
 } 

@@ -20,6 +20,7 @@ router.post('/submit', async (req, res) => {
             photographyQuestions,
             externalAffairsQuestions,
             whyScope,
+            whyAwsClub,
             awsClubPreference
         } = req.body;
 
@@ -59,6 +60,7 @@ router.post('/submit', async (req, res) => {
             numberOfBacklogs: parseInt(backlogs),
             department: mappedDepartment,
             whyScopeClub: whyScope,
+            whyAwsClub,
             awsClubPreference,
             ipAddress: req.ip || req.connection.remoteAddress,
             userAgent: req.get('User-Agent')

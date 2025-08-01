@@ -127,29 +127,36 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="whyScope">
-                                <i class="fas fa-chevron-right"></i> WHY_SCOPE_CLUB
-                            </label>
-                            <textarea id="whyScope" name="whyScope" rows="4" placeholder="Tell us why you want to join SCOPE Club and what you can contribute (max 200 words)" required></textarea>
-                        </div>
-
-                        <div class="form-group">
                             <label>
                                 <i class="fas fa-chevron-right"></i> AWS_CLUB_PREFERENCE
                             </label>
                             <div class="radio-group">
                                 <label class="radio-option">
-                                    <input type="radio" name="awsClubPreference" value="yes" required>
+                                    <input type="radio" name="awsClubPreference" value="yes" required onchange="toggleClubQuestions()">
                                     <span class="radio-custom"></span>
                                     <span>Yes</span>
                                 </label>
                                 <label class="radio-option">
-                                    <input type="radio" name="awsClubPreference" value="no" required>
+                                    <input type="radio" name="awsClubPreference" value="no" required onchange="toggleClubQuestions()">
                                     <span class="radio-custom"></span>
                                     <span>No</span>
                                 </label>
                             </div>
                             <div class="question-text">Would you like to opt for AWS Club as your primary preference?</div>
+                        </div>
+
+                        <div class="form-group" id="awsClubQuestion" style="display: none;">
+                            <label for="whyAwsClub">
+                                <i class="fas fa-chevron-right"></i> WHY_AWS_CLUB
+                            </label>
+                            <textarea id="whyAwsClub" name="whyAwsClub" rows="4" placeholder="Tell us why you want to join AWS Club and what you can contribute (max 200 words)"></textarea>
+                        </div>
+
+                        <div class="form-group" id="scopeClubQuestion" style="display: none;">
+                            <label for="whyScope">
+                                <i class="fas fa-chevron-right"></i> WHY_SCOPE_CLUB
+                            </label>
+                            <textarea id="whyScope" name="whyScope" rows="4" placeholder="Tell us why you want to join SCOPE Club and what you can contribute (max 200 words)"></textarea>
                         </div>
 
                         <!-- Technical Department Questions -->

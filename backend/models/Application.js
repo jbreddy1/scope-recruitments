@@ -154,10 +154,18 @@ const applicationSchema = new mongoose.Schema({
         }
     },
 
-    // Common question
+    // Common questions
     whyScopeClub: {
         type: String,
-        required: [true, 'Why SCOPE Club question is required']
+        required: function() {
+            return this.awsClubPreference === 'no';
+        }
+    },
+    whyAwsClub: {
+        type: String,
+        required: function() {
+            return this.awsClubPreference === 'yes';
+        }
     },
     awsClubPreference: {
         type: String,

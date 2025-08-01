@@ -827,6 +827,40 @@ body::after {
     font-style: italic;
 }
 
+/* Dynamic Question Animations */
+.form-group {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 500px;
+    overflow: hidden;
+}
+
+.form-group.hidden {
+    opacity: 0;
+    transform: translateY(-20px);
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.form-group.showing {
+    animation: slideInQuestion 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes slideInQuestion {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+        max-height: 0;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 500px;
+    }
+}
+
 /* Department Questions */
 .department-questions {
     background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));

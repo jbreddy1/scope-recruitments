@@ -300,6 +300,31 @@ body {
     color: #8b5cf6;
 }
 
+/* Specific icon colors for different contact types */
+.contact-item .fa-instagram {
+    color: #e4405f;
+}
+
+.contact-item .fa-envelope {
+    color: #3b82f6;
+}
+
+.contact-item .fa-globe {
+    color: #10b981;
+}
+
+.contact-item:hover .fa-instagram {
+    color: #f77737;
+}
+
+.contact-item:hover .fa-envelope {
+    color: #8b5cf6;
+}
+
+.contact-item:hover .fa-globe {
+    color: #059669;
+}
+
 .contact-item span {
     font-weight: 500;
     color: #ffffff;

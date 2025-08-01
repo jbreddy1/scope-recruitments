@@ -552,7 +552,7 @@ function showSuccessMessage(applicationData = null) {
             You'll hear from us soon via email or Instagram.
         </p>
         ${applicationDetails}
-        <button onclick="this.closest('.success-modal').remove()" style="
+        <button onclick="returnToLandingPage()" style="
             background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
             color: white;
             border: none;
@@ -758,5 +758,38 @@ function toggleClubQuestions() {
                 }
             }
         }, 450);
+    }
+}
+
+// Return to landing page after successful submission
+function returnToLandingPage() {
+    // Remove the success modal
+    const modal = document.querySelector('.success-modal');
+    if (modal) {
+        modal.remove();
+    }
+    
+    // Show landing section and hide application form
+    const landingSection = document.getElementById('landingSection');
+    const applicationForm = document.getElementById('applicationForm');
+    
+    if (landingSection && applicationForm) {
+        landingSection.style.display = 'block';
+        applicationForm.style.display = 'none';
+        
+        // Reset form state
+        currentStep = 1;
+        showStep(1);
+        updateStepIndicator();
+        hideAllDepartmentQuestions();
+        
+        // Reset form
+        const form = document.getElementById('recruitmentForm');
+        if (form) {
+            form.reset();
+        }
+        
+        // Scroll to top of landing page
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 } 

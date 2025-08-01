@@ -20,6 +20,12 @@ const applicationSchema = new mongoose.Schema({
         lowercase: true,
         trim: true
     },
+    mobileNumber: {
+        type: String,
+        required: [true, 'Mobile number is required'],
+        match: [/^[0-9]{10}$/, 'Mobile number must be exactly 10 digits'],
+        trim: true
+    },
 
     // Academic Information
     currentSemester: {
@@ -152,6 +158,12 @@ const applicationSchema = new mongoose.Schema({
     whyScopeClub: {
         type: String,
         required: [true, 'Why SCOPE Club question is required']
+    },
+    awsClubPreference: {
+        type: String,
+        required: [true, 'AWS Club preference is required'],
+        enum: ['yes', 'no'],
+        lowercase: true
     },
 
     // Application metadata

@@ -91,6 +91,18 @@ function validateCurrentStep() {
         }
     });
     
+    // Validate AWS Club preference radio buttons
+    if (currentStep === 2) {
+        const awsClubRadio = document.querySelector('input[name="awsClubPreference"]:checked');
+        if (!awsClubRadio) {
+            const radioGroup = document.querySelector('.radio-group');
+            if (radioGroup) {
+                showFieldError(radioGroup, 'Please select your AWS Club preference');
+                isValid = false;
+            }
+        }
+    }
+    
     return isValid;
 }
 
@@ -277,6 +289,15 @@ function validateField(field) {
         return false;
     }
 
+    // Mobile number validation
+    if (field.id === 'mobileNumber' && value) {
+        const mobilePattern = /^[0-9]{10}$/;
+        if (!mobilePattern.test(value)) {
+            showFieldError(field, 'Mobile number must be exactly 10 digits');
+            return false;
+        }
+    }
+
     // Backlogs validation
     if (field.id === 'backlogs' && value) {
         const backlogs = parseInt(value);
@@ -360,12 +381,14 @@ async function submitApplication() {
             fullName: document.getElementById('fullName').value,
             rollNumber: document.getElementById('rollNumber').value,
             email: document.getElementById('email').value,
+            mobileNumber: document.getElementById('mobileNumber').value,
             academicYear: document.getElementById('academicYear').value,
             branch: document.getElementById('branch').value,
             cgpa: document.getElementById('cgpa').value,
             backlogs: document.getElementById('backlogs').value,
             department: document.getElementById('department').value,
-            whyScope: document.getElementById('whyScope').value
+            whyScope: document.getElementById('whyScope').value,
+            awsClubPreference: document.querySelector('input[name="awsClubPreference"]:checked')?.value
         };
 
         console.log('Form data collected:', formData);

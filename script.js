@@ -225,11 +225,21 @@ function validateForm() {
             showFieldError(whyAwsTextarea, 'Please tell us why you want to join AWS Club');
             isValid = false;
         }
+        // Clear any error from SCOPE question if AWS is selected
+        const whyScopeTextarea = document.getElementById('whyScope');
+        if (whyScopeTextarea) {
+            clearFieldError(whyScopeTextarea);
+        }
     } else if (awsPreference === 'no') {
         const whyScopeTextarea = document.getElementById('whyScope');
         if (whyScopeTextarea && !whyScopeTextarea.value.trim()) {
             showFieldError(whyScopeTextarea, 'Please tell us why you want to join SCOPE Club');
             isValid = false;
+        }
+        // Clear any error from AWS question if SCOPE is selected
+        const whyAwsTextarea = document.getElementById('whyAwsClub');
+        if (whyAwsTextarea) {
+            clearFieldError(whyAwsTextarea);
         }
     }
 
@@ -552,7 +562,7 @@ function showSuccessMessage(applicationData = null) {
             You'll hear from us soon via email or Instagram.
         </p>
         ${applicationDetails}
-        <button onclick="returnToLandingPage()" style="
+        <button onclick="closeSuccessModal()" style="
             background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
             color: white;
             border: none;
@@ -761,15 +771,15 @@ function toggleClubQuestions() {
     }
 }
 
-// Return to landing page after successful submission
-function returnToLandingPage() {
+// Close success modal and return to landing page
+function closeSuccessModal() {
     // Remove the success modal
     const modal = document.querySelector('.success-modal');
     if (modal) {
         modal.remove();
     }
     
-    // Show landing section and hide application form
+    // Show landing page and hide application form
     const landingSection = document.getElementById('landingSection');
     const applicationForm = document.getElementById('applicationForm');
     
@@ -777,19 +787,19 @@ function returnToLandingPage() {
         landingSection.style.display = 'block';
         applicationForm.style.display = 'none';
         
-        // Reset form state
+        // Reset form
+        document.getElementById('recruitmentForm').reset();
         currentStep = 1;
         showStep(1);
         updateStepIndicator();
         hideAllDepartmentQuestions();
         
-        // Reset form
-        const form = document.getElementById('recruitmentForm');
-        if (form) {
-            form.reset();
-        }
+        // Hide any dynamic questions
+        const awsClubQuestion = document.getElementById('awsClubQuestion');
+        const scopeClubQuestion = document.getElementById('scopeClubQuestion');
+        if (awsClubQuestion) awsClubQuestion.style.display = 'none';
+        if (scopeClubQuestion) scopeClubQuestion.style.display = 'none';
         
-        // Scroll to top of landing page
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        console.log('Returned to landing page');
     }
 } 

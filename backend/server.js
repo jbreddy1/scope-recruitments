@@ -8,7 +8,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+    origin: process.env.CORS_ORIGIN || '*',
     credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
@@ -41,6 +41,15 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../index.html'));
 });
 
+// Serve other HTML files
+app.get('/landing', (req, res) => {
+    res.sendFile(path.join(__dirname, '../landing.html'));
+});
+
+app.get('/application', (req, res) => {
+    res.sendFile(path.join(__dirname, '../application.html'));
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error('Server Error:', err);
@@ -65,4 +74,5 @@ app.listen(PORT, () => {
     console.log(`🚀 Server is running on port ${PORT}`);
     console.log(`📱 Frontend: http://localhost:${PORT}`);
     console.log(`🔗 API: http://localhost:${PORT}/api`);
+    console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
 }); 

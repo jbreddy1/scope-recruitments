@@ -151,8 +151,7 @@ const applicationSchema = new mongoose.Schema({
     // Common question
     whyScopeClub: {
         type: String,
-        required: [true, 'Why SCOPE Club question is required'],
-        minlength: [50, 'Answer must be at least 50 characters long']
+        required: [true, 'Why SCOPE Club question is required']
     },
 
     // Application metadata

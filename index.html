@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCOPE Club Recruitment - MLRIT</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+
+    <!-- Landing Section -->
+    <section class="landing-section" id="landingSection">
+        <div class="container">
+            <!-- Header with Logos -->
+            <div class="header-logos">
+                <div class="logo-section">
+                    <div class="scope-logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h2>SCOPE CLUB</h2>
+                            <p>School of Programming Excellence</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mlrit-logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h2>MLRIT</h2>
+                        <p>Raising Engineers</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Welcome Text -->
+            <div class="welcome-text">
+                <h1>Welcome to SCOPE Club MLRIT</h1>
+            </div>
+
+            <!-- Main Content Card -->
+            <div class="landing-content">
+                <h2>Ready to step beyond the classroom?</h2>
+                <p>Here's your chance to be part of something bigger.</p>
+                <p>Fill out the details and let us know what you bring to the table.</p>
+                <p class="highlight">Let this be the start of something amazing.</p>
+                
+                <div class="divider"></div>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-hashtag"></i>
+                        <span>DM us on Instagram: @mlrit_scope</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email: scopeclub@mlrit.ac.in</span>
+                    </div>
+                </div>
+                
+                <p class="conclusion">Let's build, create, and grow – together.</p>
+                
+                <button class="initialize-btn" id="initializeBtn">
+                    <i class="fas fa-rocket"></i>
+                    Initialize Recruitment Process
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Form Section -->
+    <section class="application-form" id="applicationForm" style="display: none;">
+        <div class="container">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2><i class="fas fa-file-code"></i> JOIN_SCOPE.exe</h2>
+                    <p>// Fill out the form below to compile your application</p>
+                </div>
+
+                <form id="recruitmentForm" class="recruitment-form">
+                    <!-- Step Indicator -->
+                    <div class="step-indicator">
+                        <div class="step-dot active" data-step="1"></div>
+                        <div class="step-dot" data-step="2"></div>
+                    </div>
+                    
+                    <!-- Personal Information -->
+                    <div class="form-section step-1">
+                        <h3><i class="fas fa-user"></i> Personal Information</h3>
+                        
+                        <div class="form-group">
+                            <label for="fullName">
+                                <i class="fas fa-chevron-right"></i> FULL_NAME
+                            </label>
+                            <input type="text" id="fullName" name="fullName" placeholder="IN CAPS" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">
+                                <i class="fas fa-chevron-right"></i> EMAIL_ADDRESS
+                            </label>
+                            <input type="email" id="email" name="email" placeholder="e.g., 23r21a05y1@mlrit.ac.in" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rollNumber">
+                                <i class="fas fa-chevron-right"></i> ROLL_NUMBER
+                            </label>
+                            <input type="text" id="rollNumber" name="rollNumber" placeholder="e.g., 23R21A05Y1" required>
+                        </div>
+                    </div>
+
+                    <!-- Academic Information -->
+                    <div class="form-section step-2" style="display: none;">
+                        <h3><i class="fas fa-graduation-cap"></i> Academic Information</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="academicYear">
+                                    <i class="fas fa-chevron-right"></i> CURRENT_SEMESTER
+                                </label>
+                                <select id="academicYear" name="academicYear" required>
+                                    <option value="">SELECT_SEMESTER</option>
+                                    <option value="1">Semester 1</option>
+                                    <option value="2">Semester 2</option>
+                                    <option value="3">Semester 3</option>
+                                    <option value="4">Semester 4</option>
+                                    <option value="5">Semester 5</option>
+                                    <option value="6">Semester 6</option>
+                                    <option value="7">Semester 7</option>
+                                    <option value="8">Semester 8</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="branch">
+                                    <i class="fas fa-chevron-right"></i> BRANCH
+                                </label>
+                                <select id="branch" name="branch" required>
+                                    <option value="">SELECT_BRANCH</option>
+                                    <option value="CSE">Computer Science Engineering</option>
+                                    <option value="ECE">Electronics & Communication Engineering</option>
+                                    <option value="EEE">Electrical & Electronics Engineering</option>
+                                    <option value="MECH">Mechanical Engineering</option>
+                                    <option value="CIVIL">Civil Engineering</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cgpa">
+                                    <i class="fas fa-chevron-right"></i> CURRENT_CGPA
+                                </label>
+                                <input type="number" id="cgpa" name="cgpa" step="0.01" min="0" max="10" placeholder="e.g., 8.5" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="backlogs">
+                                    <i class="fas fa-chevron-right"></i> NUMBER_OF_BACKLOGS
+                                </label>
+                                <input type="number" id="backlogs" name="backlogs" min="0" placeholder="e.g., 0" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="department">
+                                <i class="fas fa-chevron-right"></i> DEPARTMENT_OF_INTEREST
+                            </label>
+                            <select id="department" name="department" required onchange="showDepartmentQuestions()">
+                                <option value="">SELECT_DEPARTMENT</option>
+                                <option value="technical">Technical</option>
+                                <option value="graphic-designing">Graphic Designing</option>
+                                <option value="photography-videography">Photography & Videography</option>
+                                <option value="external-affairs">External Affairs (Content, Promotion, Operations)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="whyScope">
+                                <i class="fas fa-chevron-right"></i> WHY_SCOPE_CLUB
+                            </label>
+                            <textarea id="whyScope" name="whyScope" rows="4" placeholder="Tell us why you want to join SCOPE Club and what you can contribute" required></textarea>
+                        </div>
+
+                        <!-- Technical Department Questions -->
+                        <div id="technical-questions" class="department-questions" style="display: none;">
+                            <h4><i class="fas fa-code"></i> Technical Department Questions</h4>
+                            
+                            <div class="form-group">
+                                <label for="whyTechnical">
+                                    <i class="fas fa-chevron-right"></i> WHY_TECHNICAL_TEAM
+                                </label>
+                                <textarea id="whyTechnical" name="whyTechnical" rows="3" placeholder="Why do you want to join the Technical team?"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="technicalSkills">
+                                    <i class="fas fa-chevron-right"></i> TECHNICAL_SKILLS
+                                </label>
+                                <textarea id="technicalSkills" name="technicalSkills" rows="3" placeholder="List your technical skills (programming languages, frameworks, tools, etc.)"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="projectsWorkedOn">
+                                    <i class="fas fa-chevron-right"></i> PROJECTS_WORKED_ON
+                                </label>
+                                <textarea id="projectsWorkedOn" name="projectsWorkedOn" rows="3" placeholder="Describe any projects you've worked on"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="projectLinks">
+                                    <i class="fas fa-chevron-right"></i> PROJECT_LINKS
+                                </label>
+                                <input type="url" id="projectLinks" name="projectLinks" placeholder="GitHub/GitLab links or live project URLs">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="technicalSkillsRating">
+                                    <i class="fas fa-chevron-right"></i> SELF_RATING_TECHNICAL_SKILLS
+                                </label>
+                                <select id="technicalSkillsRating" name="technicalSkillsRating">
+                                    <option value="">SELECT_RATING</option>
+                                    <option value="1">1 - Beginner</option>
+                                    <option value="2">2 - Basic</option>
+                                    <option value="3">3 - Intermediate</option>
+                                    <option value="4">4 - Advanced</option>
+                                    <option value="5">5 - Expert</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Graphic Designing Department Questions -->
+                        <div id="graphic-questions" class="department-questions" style="display: none;">
+                            <h4><i class="fas fa-palette"></i> Graphic Designing Department Questions</h4>
+                            
+                            <div class="form-group">
+                                <label for="whyGraphic">
+                                    <i class="fas fa-chevron-right"></i> WHY_GRAPHIC_DESIGNING
+                                </label>
+                                <textarea id="whyGraphic" name="whyGraphic" rows="3" placeholder="Why do you want to join the Graphic Designing team?"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="graphicSkills">
+                                    <i class="fas fa-chevron-right"></i> GRAPHIC_DESIGNING_SKILLS
+                                </label>
+                                <textarea id="graphicSkills" name="graphicSkills" rows="3" placeholder="Describe your graphic designing skills"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="graphicPortfolio">
+                                    <i class="fas fa-chevron-right"></i> TOOLS_USED
+                                </label>
+                                <textarea id="graphicPortfolio" name="graphicPortfolio" rows="3" placeholder="What tools and software do you use for designing?"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="graphicLinks">
+                                    <i class="fas fa-chevron-right"></i> PORTFOLIO_LINK
+                                </label>
+                                <input type="url" id="graphicLinks" name="graphicLinks" placeholder="Link to your portfolio or design work">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="graphicSkillsRating">
+                                    <i class="fas fa-chevron-right"></i> SELF_RATING_GRAPHIC_SKILLS
+                                </label>
+                                <select id="graphicSkillsRating" name="graphicSkillsRating">
+                                    <option value="">SELECT_RATING</option>
+                                    <option value="1">1 - Beginner</option>
+                                    <option value="2">2 - Basic</option>
+                                    <option value="3">3 - Intermediate</option>
+                                    <option value="4">4 - Advanced</option>
+                                    <option value="5">5 - Expert</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Photography & Videography Department Questions -->
+                        <div id="photography-questions" class="department-questions" style="display: none;">
+                            <h4><i class="fas fa-camera"></i> Photography & Videography Department Questions</h4>
+                            
+                            <div class="form-group">
+                                <label for="whyPhotography">
+                                    <i class="fas fa-chevron-right"></i> WHY_PHOTOGRAPHY_VIDEOGRAPHY
+                                </label>
+                                <textarea id="whyPhotography" name="whyPhotography" rows="3" placeholder="Why do you want to join the Photography & Videography team?"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="photographySkills">
+                                    <i class="fas fa-chevron-right"></i> PHOTOGRAPHY_VIDEOGRAPHY_SKILLS
+                                </label>
+                                <textarea id="photographySkills" name="photographySkills" rows="3" placeholder="Describe your photography and videography skills"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="photographyPortfolio">
+                                    <i class="fas fa-chevron-right"></i> EQUIPMENT_OWNED
+                                </label>
+                                <textarea id="photographyPortfolio" name="photographyPortfolio" rows="3" placeholder="What equipment do you own or have access to?"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="photographyLinks">
+                                    <i class="fas fa-chevron-right"></i> PORTFOLIO_LINK
+                                </label>
+                                <input type="url" id="photographyLinks" name="photographyLinks" placeholder="Link to your photography/videography portfolio">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="photographySkillsRating">
+                                    <i class="fas fa-chevron-right"></i> SELF_RATING_PHOTOGRAPHY_SKILLS
+                                </label>
+                                <select id="photographySkillsRating" name="photographySkillsRating">
+                                    <option value="">SELECT_RATING</option>
+                                    <option value="1">1 - Beginner</option>
+                                    <option value="2">2 - Basic</option>
+                                    <option value="3">3 - Intermediate</option>
+                                    <option value="4">4 - Advanced</option>
+                                    <option value="5">5 - Expert</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- External Affairs Department Questions -->
+                        <div id="external-affairs-questions" class="department-questions" style="display: none;">
+                            <h4><i class="fas fa-handshake"></i> External Affairs Department Questions</h4>
+                            
+                            <div class="form-group">
+                                <label for="whyExternalAffairs">
+                                    <i class="fas fa-chevron-right"></i> WHY_EXTERNAL_AFFAIRS
+                                </label>
+                                <textarea id="whyExternalAffairs" name="whyExternalAffairs" rows="3" placeholder="Why do you want to join the External Affairs team?"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="externalAffairsSkills">
+                                    <i class="fas fa-chevron-right"></i> COMMUNICATION_SKILLS
+                                </label>
+                                <textarea id="externalAffairsSkills" name="externalAffairsSkills" rows="3" placeholder="Describe your communication and interpersonal skills"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="externalAffairsExperience">
+                                    <i class="fas fa-chevron-right"></i> PREVIOUS_EXPERIENCE
+                                </label>
+                                <textarea id="externalAffairsExperience" name="externalAffairsExperience" rows="3" placeholder="Any previous experience in content creation, promotion, or operations?"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="externalAffairsLinks">
+                                    <i class="fas fa-chevron-right"></i> SOCIAL_MEDIA_HANDLES
+                                </label>
+                                <input type="text" id="externalAffairsLinks" name="externalAffairsLinks" placeholder="Your social media handles (Instagram, LinkedIn, etc.)">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="externalAffairsSkillsRating">
+                                    <i class="fas fa-chevron-right"></i> SELF_RATING_COMMUNICATION_SKILLS
+                                </label>
+                                <select id="externalAffairsSkillsRating" name="externalAffairsSkillsRating">
+                                    <option value="">SELECT_RATING</option>
+                                    <option value="1">1 - Beginner</option>
+                                    <option value="2">2 - Basic</option>
+                                    <option value="3">3 - Intermediate</option>
+                                    <option value="4">4 - Advanced</option>
+                                    <option value="5">5 - Expert</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Navigation -->
+                    <div class="form-navigation">
+                        <button type="button" id="prevBtn" class="nav-btn prev-btn" style="display: none;">
+                            <i class="fas fa-arrow-left"></i>
+                            Previous
+                        </button>
+                        <button type="button" id="nextBtn" class="nav-btn next-btn" style="float: right;">
+                            Next
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button type="button" class="submit-btn" id="submitBtn" style="display: none;">
+                            <i class="fas fa-rocket"></i>
+                            Compile & Submit Application
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html> 

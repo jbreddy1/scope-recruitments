@@ -91,18 +91,6 @@ function validateCurrentStep() {
         }
     });
     
-    // Validate AWS Club preference radio buttons
-    if (currentStep === 2) {
-        const awsClubRadio = document.querySelector('input[name="awsClubPreference"]:checked');
-        if (!awsClubRadio) {
-            const radioGroup = document.querySelector('.radio-group');
-            if (radioGroup) {
-                showFieldError(radioGroup, 'Please select your AWS Club preference');
-                isValid = false;
-            }
-        }
-    }
-    
     return isValid;
 }
 
@@ -211,6 +199,24 @@ function validateForm() {
         isValid = false;
     }
 
+    // Mobile number validation
+    const mobileInput = document.getElementById('mobileNumber');
+    if (mobileInput.value) {
+        const mobilePattern = /^[0-9]{10}$/;
+        if (!mobilePattern.test(mobileInput.value)) {
+            showFieldError(mobileInput, 'Mobile number must be exactly 10 digits');
+            isValid = false;
+        }
+    }
+
+    // AWS Club preference validation
+    const awsClubRadios = document.querySelectorAll('input[name="awsClubPreference"]');
+    const awsClubSelected = Array.from(awsClubRadios).some(radio => radio.checked);
+    if (!awsClubSelected) {
+        showFieldError(awsClubRadios[0], 'Please select your AWS Club preference');
+        isValid = false;
+    }
+
     // CGPA validation
     const cgpaInput = document.getElementById('cgpa');
     if (cgpaInput.value) {
@@ -290,7 +296,7 @@ function validateField(field) {
     }
 
     // Mobile number validation
-    if (field.id === 'mobileNumber' && value) {
+    if (field.type === 'tel' && value) {
         const mobilePattern = /^[0-9]{10}$/;
         if (!mobilePattern.test(value)) {
             showFieldError(field, 'Mobile number must be exactly 10 digits');

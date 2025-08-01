@@ -162,8 +162,7 @@ const applicationSchema = new mongoose.Schema({
     awsClubPreference: {
         type: String,
         required: [true, 'AWS Club preference is required'],
-        enum: ['yes', 'no'],
-        lowercase: true
+        enum: ['yes', 'no']
     },
 
     // Application metadata

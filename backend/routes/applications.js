@@ -9,6 +9,7 @@ router.post('/submit', async (req, res) => {
             fullName,
             rollNumber,
             email,
+            mobileNumber,
             academicYear,
             branch,
             cgpa,
@@ -18,7 +19,8 @@ router.post('/submit', async (req, res) => {
             graphicQuestions,
             photographyQuestions,
             externalAffairsQuestions,
-            whyScope
+            whyScope,
+            awsClubPreference
         } = req.body;
 
         // Check if application already exists with same email or roll number
@@ -50,12 +52,14 @@ router.post('/submit', async (req, res) => {
             fullName,
             rollNumber,
             email,
+            mobileNumber,
             // Map academic fields to match schema
             currentSemester: parseInt(academicYear),
             currentCGPA: parseFloat(cgpa),
             numberOfBacklogs: parseInt(backlogs),
             department: mappedDepartment,
             whyScopeClub: whyScope,
+            awsClubPreference,
             ipAddress: req.ip || req.connection.remoteAddress,
             userAgent: req.get('User-Agent')
         };

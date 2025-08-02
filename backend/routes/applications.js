@@ -21,7 +21,11 @@ router.post('/submit', async (req, res) => {
             externalAffairsQuestions,
             whyScope,
             whyAwsClub,
-            awsClubPreference
+            awsClubPreference,
+            introduceYourself,
+            accommodationType,
+            githubLink,
+            linkedinLink
         } = req.body;
 
         // Check if application already exists with same email or roll number
@@ -36,29 +40,22 @@ router.post('/submit', async (req, res) => {
             });
         }
 
-        // Map department values to match the database schema
-        let mappedDepartment = department;
-        if (department === 'technical') {
-            mappedDepartment = 'Technical';
-        } else if (department === 'graphic-designing') {
-            mappedDepartment = 'Graphic Designing';
-        } else if (department === 'photography-videography') {
-            mappedDepartment = 'Photography & Videography';
-        } else if (department === 'external-affairs') {
-            mappedDepartment = 'External Affairs (Content, Promotion, Operations)';
-        }
-
         // Create application data object
         const applicationData = {
             fullName,
             rollNumber,
             email,
             mobileNumber,
+            accommodationType,
             // Map academic fields to match schema
             currentSemester: parseInt(academicYear),
+            branch,
             currentCGPA: parseFloat(cgpa),
             numberOfBacklogs: parseInt(backlogs),
-            department: mappedDepartment,
+            department,
+            introduceYourself,
+            githubLink,
+            linkedinLink,
             whyScopeClub: whyScope,
             whyAwsClub,
             awsClubPreference,

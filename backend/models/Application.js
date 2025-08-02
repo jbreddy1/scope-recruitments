@@ -26,6 +26,11 @@ const applicationSchema = new mongoose.Schema({
         match: [/^[0-9]{10}$/, 'Mobile number must be exactly 10 digits'],
         trim: true
     },
+    accommodationType: {
+        type: String,
+        required: [true, 'Accommodation type is required'],
+        enum: ['dayScholar', 'hosteller']
+    },
 
     // Academic Information
     currentSemester: {
@@ -33,6 +38,11 @@ const applicationSchema = new mongoose.Schema({
         required: [true, 'Current semester is required'],
         min: [1, 'Semester must be at least 1'],
         max: [8, 'Semester cannot exceed 8']
+    },
+    branch: {
+        type: String,
+        required: [true, 'Branch and section is required'],
+        trim: true
     },
     currentCGPA: {
         type: Number,
@@ -50,7 +60,25 @@ const applicationSchema = new mongoose.Schema({
     department: {
         type: String,
         required: [true, 'Department selection is required'],
-        enum: ['Technical', 'Graphic Designing', 'Photography & Videography', 'External Affairs (Content, Promotion, Operations)']
+        enum: ['technical', 'graphic-designing', 'photography-videography', 'external-affairs']
+    },
+
+    // Personal Introduction
+    introduceYourself: {
+        type: String,
+        required: [true, 'Self introduction is required'],
+        trim: true,
+        maxlength: [1000, 'Introduction cannot exceed 1000 characters']
+    },
+
+    // Social Links (Optional)
+    githubLink: {
+        type: String,
+        trim: true
+    },
+    linkedinLink: {
+        type: String,
+        trim: true
     },
 
     // Department-specific questions
@@ -202,7 +230,7 @@ applicationSchema.index({ submittedAt: -1 });
 applicationSchema.pre('save', function(next) {
     const dept = this.department;
     
-    if (dept === 'Technical') {
+    if (dept === 'technical') {
         if (!this.technicalQuestions.whyTechnicalTeam || 
             !this.technicalQuestions.technicalSkills || 
             !this.technicalQuestions.projectsWorkedOn || 
@@ -210,7 +238,7 @@ applicationSchema.pre('save', function(next) {
             !this.technicalQuestions.technicalSkillsRating) {
             return next(new Error('All technical questions are required'));
         }
-    } else if (dept === 'Graphic Designing') {
+    } else if (dept === 'graphic-designing') {
         if (!this.graphicQuestions.whyGraphicDesigning || 
             !this.graphicQuestions.graphicDesigningSkills || 
             !this.graphicQuestions.toolsUsed || 
@@ -218,7 +246,7 @@ applicationSchema.pre('save', function(next) {
             !this.graphicQuestions.graphicDesigningSkillsRating) {
             return next(new Error('All graphic designing questions are required'));
         }
-    } else if (dept === 'Photography & Videography') {
+    } else if (dept === 'photography-videography') {
         if (!this.photographyQuestions.whyPhotographyVideography || 
             !this.photographyQuestions.photographyVideographySkills || 
             !this.photographyQuestions.equipmentOwned || 
@@ -226,7 +254,7 @@ applicationSchema.pre('save', function(next) {
             !this.photographyQuestions.photographyVideographySkillsRating) {
             return next(new Error('All photography & videography questions are required'));
         }
-    } else if (dept === 'External Affairs (Content, Promotion, Operations)') {
+    } else if (dept === 'external-affairs') {
         if (!this.externalAffairsQuestions.whyExternalAffairs || 
             !this.externalAffairsQuestions.communicationSkills || 
             !this.externalAffairsQuestions.previousExperience || 

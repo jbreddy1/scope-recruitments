@@ -101,14 +101,29 @@
                             <label for="rollNumber">
                                 <i class="fas fa-chevron-right"></i> ROLL_NUMBER
                             </label>
-                            <input type="text" id="rollNumber" name="rollNumber" placeholder="e.g., 23r21a05y1" required>
+                            <input type="text" id="rollNumber" name="rollNumber" placeholder="e.g., 23R21A05Y1" required>
                         </div>
 
                         <div class="form-group">
                             <label for="mobileNumber">
                                 <i class="fas fa-chevron-right"></i> MOBILE_NUMBER
                             </label>
-                            <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="e.g., 7386014409" pattern="[0-9]{10}" maxlength="10" required>
+                            <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="e.g., 9876543210" pattern="[0-9]{10}" maxlength="10" required>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="accommodationType" value="dayScholar" required>
+                                    <span class="radio-custom"></span>
+                                    <span>Day Scholar</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="accommodationType" value="hosteller" required>
+                                    <span class="radio-custom"></span>
+                                    <span>Hosteller</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
 
@@ -136,17 +151,9 @@
 
                             <div class="form-group">
                                 <label for="branch">
-                                    <i class="fas fa-chevron-right"></i> BRANCH
+                                    <i class="fas fa-chevron-right"></i> BRANCH_AND_SECTION
                                 </label>
-                                <select id="branch" name="branch" required>
-                                    <option value="">SELECT_BRANCH</option>
-                                    <option value="CSE">CSE</option>
-                                    <option value="ECE">ECE</option>
-                                    <option value="EEE">IT</option>
-                                    <option value="MECH">CSM</option>
-                                    <option value="CIVIL">CSD</option>
-                                    <option value="CSIT">CSIT</option>
-                                </select>
+                                <input type="text" id="branch" name="branch" placeholder="e.g., CSE-A, ECE-B, etc." required>
                             </div>
                         </div>
 
@@ -167,16 +174,24 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="department">
-                                <i class="fas fa-chevron-right"></i> DEPARTMENT_OF_INTEREST
+                            <label for="githubLink">
+                                <i class="fas fa-chevron-right"></i> GITHUB_LINK (OPTIONAL)
                             </label>
-                            <select id="department" name="department" required onchange="showDepartmentQuestions()">
-                                <option value="">SELECT_DEPARTMENT</option>
-                                <option value="technical">Technical</option>
-                                <option value="graphic-designing">Graphic Designing</option>
-                                <option value="photography-videography">Photography & Videography</option>
-                                <option value="external-affairs">External Affairs (Content, Promotion, Operations)</option>
-                            </select>
+                            <input type="url" id="githubLink" name="githubLink" placeholder="https://github.com/yourusername">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="linkedinLink">
+                                <i class="fas fa-chevron-right"></i> LINKEDIN_LINK (OPTIONAL)
+                            </label>
+                            <input type="url" id="linkedinLink" name="linkedinLink" placeholder="https://linkedin.com/in/yourprofile">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="introduceYourself">
+                                <i class="fas fa-chevron-right"></i> INTRODUCE_YOURSELF
+                            </label>
+                            <textarea id="introduceYourself" name="introduceYourself" rows="4" placeholder="Tell us about yourself, your interests, and what motivates you (max 200 words)" required></textarea>
                         </div>
 
                         <div class="form-group">
@@ -210,6 +225,21 @@
                                 <i class="fas fa-chevron-right"></i> WHY_SCOPE_CLUB
                             </label>
                             <textarea id="whyScope" name="whyScope" rows="4" placeholder="Tell us why you want to join SCOPE Club and what you can contribute (max 200 words)"></textarea>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="department">
+                                <i class="fas fa-chevron-right"></i> DEPARTMENT_OF_INTEREST
+                            </label>
+                            <select id="department" name="department" required onchange="showDepartmentQuestions()">
+                                <option value="">SELECT_DEPARTMENT</option>
+                                <option value="technical">Technical</option>
+                                <option value="graphic-designing">Graphic Designing</option>
+                                <option value="photography-videography">Photography & Videography</option>
+                                <option value="external-affairs">External Affairs (Content, Promotion, Operations)</option>
+                            </select>
                         </div>
 
                         <!-- Technical Department Questions -->

@@ -91,6 +91,16 @@ function validateCurrentStep() {
         }
     });
     
+    // Special validation for step 1 - accommodation type radio buttons
+    if (currentStep === 1) {
+        const accommodationRadios = currentStepElement.querySelectorAll('input[name="accommodationType"]');
+        const accommodationSelected = Array.from(accommodationRadios).some(radio => radio.checked);
+        if (!accommodationSelected) {
+            showFieldError(accommodationRadios[0], 'Please select your accommodation type');
+            isValid = false;
+        }
+    }
+    
     return isValid;
 }
 
@@ -214,6 +224,21 @@ function validateForm() {
     const awsClubSelected = Array.from(awsClubRadios).some(radio => radio.checked);
     if (!awsClubSelected) {
         showFieldError(awsClubRadios[0], 'Please select your AWS Club preference');
+        isValid = false;
+    }
+
+    // Accommodation type validation
+    const accommodationRadios = document.querySelectorAll('input[name="accommodationType"]');
+    const accommodationSelected = Array.from(accommodationRadios).some(radio => radio.checked);
+    if (!accommodationSelected) {
+        showFieldError(accommodationRadios[0], 'Please select your accommodation type');
+        isValid = false;
+    }
+
+    // Introduce yourself validation
+    const introduceYourselfTextarea = document.getElementById('introduceYourself');
+    if (introduceYourselfTextarea && !introduceYourselfTextarea.value.trim()) {
+        showFieldError(introduceYourselfTextarea, 'Please introduce yourself');
         isValid = false;
     }
 
@@ -419,7 +444,11 @@ async function submitApplication() {
             cgpa: document.getElementById('cgpa').value,
             backlogs: document.getElementById('backlogs').value,
             department: document.getElementById('department').value,
-            awsClubPreference: document.querySelector('input[name="awsClubPreference"]:checked')?.value
+            awsClubPreference: document.querySelector('input[name="awsClubPreference"]:checked')?.value,
+            introduceYourself: document.getElementById('introduceYourself').value,
+            accommodationType: document.querySelector('input[name="accommodationType"]:checked')?.value,
+            githubLink: document.getElementById('githubLink').value,
+            linkedinLink: document.getElementById('linkedinLink').value
         };
 
         // Add dynamic club question based on preference

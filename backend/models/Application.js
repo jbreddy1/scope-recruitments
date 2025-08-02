@@ -135,50 +135,57 @@ const applicationSchema = new mongoose.Schema({
     photographyQuestions: {
         whyPhotographyVideography: {
             type: String,
-            required: function() { return this.department === 'Photography & Videography'; }
+            required: function() { return this.department === 'photography-videography'; }
         },
-        photographyVideographySkills: {
+        editingTools: {
             type: String,
-            required: function() { return this.department === 'Photography & Videography'; }
+            required: function() { return this.department === 'photography-videography'; }
         },
-        equipmentOwned: {
-            type: String,
-            required: function() { return this.department === 'Photography & Videography'; }
+        shootingDevices: {
+            type: [String],
+            required: function() { return this.department === 'photography-videography'; }
         },
-        portfolioLink: {
+        photoVideoWorks: {
+            type: [String],
+            required: function() { return this.department === 'photography-videography'; }
+        },
+        portfolioLinks: {
             type: String,
-            required: function() { return this.department === 'Photography & Videography'; }
+            required: function() { return this.department === 'photography-videography'; }
         },
         photographyVideographySkillsRating: {
             type: Number,
-            required: function() { return this.department === 'Photography & Videography'; },
+            required: function() { return this.department === 'photography-videography'; },
             min: [1, 'Rating must be at least 1'],
-            max: [10, 'Rating cannot exceed 10']
+            max: [5, 'Rating cannot exceed 5']
         }
     },
 
     externalAffairsQuestions: {
         whyExternalAffairs: {
             type: String,
-            required: function() { return this.department === 'External Affairs (Content, Promotion, Operations)'; }
+            required: function() { return this.department === 'external-affairs'; }
         },
-        communicationSkills: {
-            type: String,
-            required: function() { return this.department === 'External Affairs (Content, Promotion, Operations)'; }
+        externalAffairsRole: {
+            type: [String],
+            required: function() { return this.department === 'external-affairs'; }
         },
-        previousExperience: {
+        relevantSkillsExperience: {
             type: String,
-            required: function() { return this.department === 'External Affairs (Content, Promotion, Operations)'; }
+            required: function() { return this.department === 'external-affairs'; }
         },
-        socialMediaHandles: {
+        previousWorkExperience: {
             type: String,
-            required: function() { return this.department === 'External Affairs (Content, Promotion, Operations)'; }
+            required: function() { return this.department === 'external-affairs'; }
+        },
+        workPortfolioLinks: {
+            type: String,
+            required: function() { return this.department === 'external-affairs'; }
         },
         communicationSkillsRating: {
-            type: Number,
-            required: function() { return this.department === 'External Affairs (Content, Promotion, Operations)'; },
-            min: [1, 'Rating must be at least 1'],
-            max: [10, 'Rating cannot exceed 10']
+            type: String,
+            required: function() { return this.department === 'external-affairs'; },
+            enum: ['1', '2', '3', '4', '5']
         }
     },
 
@@ -248,17 +255,19 @@ applicationSchema.pre('save', function(next) {
         }
     } else if (dept === 'photography-videography') {
         if (!this.photographyQuestions.whyPhotographyVideography || 
-            !this.photographyQuestions.photographyVideographySkills || 
-            !this.photographyQuestions.equipmentOwned || 
-            !this.photographyQuestions.portfolioLink || 
+            !this.photographyQuestions.editingTools || 
+            !this.photographyQuestions.shootingDevices || 
+            !this.photographyQuestions.photoVideoWorks || 
+            !this.photographyQuestions.portfolioLinks || 
             !this.photographyQuestions.photographyVideographySkillsRating) {
             return next(new Error('All photography & videography questions are required'));
         }
     } else if (dept === 'external-affairs') {
         if (!this.externalAffairsQuestions.whyExternalAffairs || 
-            !this.externalAffairsQuestions.communicationSkills || 
-            !this.externalAffairsQuestions.previousExperience || 
-            !this.externalAffairsQuestions.socialMediaHandles || 
+            !this.externalAffairsQuestions.externalAffairsRole || 
+            !this.externalAffairsQuestions.relevantSkillsExperience || 
+            !this.externalAffairsQuestions.previousWorkExperience || 
+            !this.externalAffairsQuestions.workPortfolioLinks || 
             !this.externalAffairsQuestions.communicationSkillsRating) {
             return next(new Error('All external affairs questions are required'));
         }

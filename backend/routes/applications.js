@@ -83,18 +83,20 @@ router.post('/submit', async (req, res) => {
         } else if (department === 'photography-videography') {
             applicationData.photographyQuestions = {
                 whyPhotographyVideography: photographyQuestions.whyPhotographyVideography,
-                photographyVideographySkills: photographyQuestions.photographyVideographySkills,
-                equipmentOwned: photographyQuestions.equipmentOwned,
-                portfolioLink: photographyQuestions.portfolioLink,
+                editingTools: photographyQuestions.editingTools,
+                shootingDevices: photographyQuestions.shootingDevices,
+                photoVideoWorks: photographyQuestions.photoVideoWorks,
+                portfolioLinks: photographyQuestions.portfolioLinks,
                 photographyVideographySkillsRating: parseInt(photographyQuestions.photographyVideographySkillsRating)
             };
         } else if (department === 'external-affairs') {
             applicationData.externalAffairsQuestions = {
                 whyExternalAffairs: externalAffairsQuestions.whyExternalAffairs,
-                communicationSkills: externalAffairsQuestions.communicationSkills,
-                previousExperience: externalAffairsQuestions.previousExperience,
-                socialMediaHandles: externalAffairsQuestions.socialMediaHandles,
-                communicationSkillsRating: parseInt(externalAffairsQuestions.communicationSkillsRating)
+                externalAffairsRole: externalAffairsQuestions.externalAffairsRole,
+                relevantSkillsExperience: externalAffairsQuestions.relevantSkillsExperience,
+                previousWorkExperience: externalAffairsQuestions.previousWorkExperience,
+                workPortfolioLinks: externalAffairsQuestions.workPortfolioLinks,
+                communicationSkillsRating: externalAffairsQuestions.communicationSkillsRating
             };
         }
 

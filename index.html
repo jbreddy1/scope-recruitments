@@ -101,14 +101,14 @@
                             <label for="rollNumber">
                                 <i class="fas fa-chevron-right"></i> ROLL_NUMBER
                             </label>
-                            <input type="text" id="rollNumber" name="rollNumber" placeholder="e.g., 23R21A05Y1" required>
+                            <input type="text" id="rollNumber" name="rollNumber" placeholder="e.g., 23r21a05y1" required>
                         </div>
 
                         <div class="form-group">
                             <label for="mobileNumber">
                                 <i class="fas fa-chevron-right"></i> MOBILE_NUMBER
                             </label>
-                            <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="e.g., 9876543210" pattern="[0-9]{10}" maxlength="10" required>
+                            <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="e.g., 7386014409" pattern="[0-9]{10}" maxlength="10" required>
                         </div>
 
                         <div class="form-group">
@@ -162,7 +162,7 @@
                                 <label for="cgpa">
                                     <i class="fas fa-chevron-right"></i> CURRENT_CGPA
                                 </label>
-                                <input type="number" id="cgpa" name="cgpa" step="0.01" min="0" max="10" placeholder="e.g., 8.5" required>
+                                <input type="number" id="cgpa" name="cgpa" step="0.01" min="0" max="10" placeholder="e.g., 8.5, 0 if no CGPA" required>
                             </div>
 
                             <div class="form-group">
@@ -304,7 +304,7 @@
                                 <label for="graphicSkills">
                                     <i class="fas fa-chevron-right"></i> GRAPHIC_DESIGNING_SKILLS
                                 </label>
-                                <textarea id="graphicSkills" name="graphicSkills" rows="3" placeholder="Describe your graphic designing skills"></textarea>
+                                <textarea id="graphicSkills" name="graphicSkills" rows="3" placeholder="Describe your graphic designing skills, have you created any designs before?"></textarea>
                             </div>
 
                             <div class="form-group">
@@ -318,7 +318,7 @@
                                 <label for="graphicLinks">
                                     <i class="fas fa-chevron-right"></i> PORTFOLIO_LINK
                                 </label>
-                                <input type="url" id="graphicLinks" name="graphicLinks" placeholder="Link to your portfolio or design work">
+                                <input type="url" id="graphicLinks" name="graphicLinks" placeholder="Link to your design work,NONE if not any">
                             </div>
 
                             <div class="form-group">
@@ -342,35 +342,84 @@
                             
                             <div class="form-group">
                                 <label for="whyPhotography">
-                                    <i class="fas fa-chevron-right"></i> WHY_PHOTOGRAPHY_VIDEOGRAPHY
+                                    <i class="fas fa-chevron-right"></i> WHY_PHOTO_VIDEO_TEAM
                                 </label>
-                                <textarea id="whyPhotography" name="whyPhotography" rows="3" placeholder="Why do you want to join the Photography & Videography team?"></textarea>
+                                <textarea id="whyPhotography" name="whyPhotography" rows="3" placeholder="// Why are you interested in joining the Photography and Videography team?"></textarea>
                             </div>
 
                             <div class="form-group">
-                                <label for="photographySkills">
-                                    <i class="fas fa-chevron-right"></i> PHOTOGRAPHY_VIDEOGRAPHY_SKILLS
+                                <label for="editingTools">
+                                    <i class="fas fa-chevron-right"></i> EDITING_TOOLS_AND_APPS
                                 </label>
-                                <textarea id="photographySkills" name="photographySkills" rows="3" placeholder="Describe your photography and videography skills"></textarea>
+                                <textarea id="editingTools" name="editingTools" rows="3" placeholder="// What editing tools or apps are you proficient in?"></textarea>
                             </div>
 
                             <div class="form-group">
-                                <label for="photographyPortfolio">
-                                    <i class="fas fa-chevron-right"></i> EQUIPMENT_OWNED
+                                <label>
+                                    <i class="fas fa-chevron-right"></i> SHOOTING_DEVICES
                                 </label>
-                                <textarea id="photographyPortfolio" name="photographyPortfolio" rows="3" placeholder="What equipment do you own or have access to?"></textarea>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="shootingDevices" value="DSLR">
+                                        <span class="checkbox-custom"></span>
+                                        <span>DSLR</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="shootingDevices" value="Phone">
+                                        <span class="checkbox-custom"></span>
+                                        <span>Phone</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="shootingDevices" value="GoPro">
+                                        <span class="checkbox-custom"></span>
+                                        <span>GoPro</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="shootingDevices" value="Other">
+                                        <span class="checkbox-custom"></span>
+                                        <span>Other</span>
+                                    </label>
+                                </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="photographyLinks">
-                                    <i class="fas fa-chevron-right"></i> PORTFOLIO_LINK
+                                <label>
+                                    <i class="fas fa-chevron-right"></i> PHOTO_VIDEO_WORKS
                                 </label>
-                                <input type="url" id="photographyLinks" name="photographyLinks" placeholder="Link to your photography/videography portfolio">
+                                <div class="checkbox-group">
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="photoVideoWorks" value="Reels">
+                                        <span class="checkbox-custom"></span>
+                                        <span>Reels</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="photoVideoWorks" value="Shorts">
+                                        <span class="checkbox-custom"></span>
+                                        <span>Shorts</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="photoVideoWorks" value="Editing">
+                                        <span class="checkbox-custom"></span>
+                                        <span>Editing</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="photoVideoWorks" value="Photography">
+                                        <span class="checkbox-custom"></span>
+                                        <span>Photography</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="portfolioLinks">
+                                    <i class="fas fa-chevron-right"></i> PORTFOLIO_LINKS
+                                </label>
+                                <input type="text" id="portfolioLinks" name="portfolioLinks" placeholder="Share links to your previous works (Instagram, Google Drive, Portfolio).">
                             </div>
 
                             <div class="form-group">
                                 <label for="photographySkillsRating">
-                                    <i class="fas fa-chevron-right"></i> SELF_RATING_PHOTOGRAPHY_SKILLS
+                                    <i class="fas fa-chevron-right"></i> SELF_RATING_SKILLS
                                 </label>
                                 <select id="photographySkillsRating" name="photographySkillsRating">
                                     <option value="">SELECT_RATING</option>
@@ -385,41 +434,69 @@
 
                         <!-- External Affairs Department Questions -->
                         <div id="external-affairs-questions" class="department-questions" style="display: none;">
-                            <h4><i class="fas fa-handshake"></i> External Affairs Department Questions</h4>
+                            <h4><i class="fas fa-bullhorn"></i> External Affairs Department Questions</h4>
                             
                             <div class="form-group">
                                 <label for="whyExternalAffairs">
-                                    <i class="fas fa-chevron-right"></i> WHY_EXTERNAL_AFFAIRS
+                                    <i class="fas fa-chevron-right"></i> WHY_EXTERNAL_AFFAIRS_TEAM
                                 </label>
-                                <textarea id="whyExternalAffairs" name="whyExternalAffairs" rows="3" placeholder="Why do you want to join the External Affairs team?"></textarea>
+                                <textarea id="whyExternalAffairs" name="whyExternalAffairs" rows="3" placeholder="// Why are you interested in joining the External Affairs team?"></textarea>
                             </div>
 
                             <div class="form-group">
-                                <label for="externalAffairsSkills">
-                                    <i class="fas fa-chevron-right"></i> COMMUNICATION_SKILLS
+                                <label>
+                                    <i class="fas fa-chevron-right"></i> EXTERNAL_AFFAIRS_ROLE
                                 </label>
-                                <textarea id="externalAffairsSkills" name="externalAffairsSkills" rows="3" placeholder="Describe your communication and interpersonal skills"></textarea>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="externalAffairsRole" value="Content Creation">
+                                        <span class="checkbox-custom"></span>
+                                        <span>Content Creation</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="externalAffairsRole" value="Promotion">
+                                        <span class="checkbox-custom"></span>
+                                        <span>Promotion</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="externalAffairsRole" value="Operation">
+                                        <span class="checkbox-custom"></span>
+                                        <span>Operation</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="externalAffairsRole" value="Social Media Management">
+                                        <span class="checkbox-custom"></span>
+                                        <span>Social Media Management</span>
+                                    </label>
+                                </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="externalAffairsExperience">
-                                    <i class="fas fa-chevron-right"></i> PREVIOUS_EXPERIENCE
+                                <label for="relevantSkillsExperience">
+                                    <i class="fas fa-chevron-right"></i> RELEVANT_SKILLS_AND_EXPERIENCE
                                 </label>
-                                <textarea id="externalAffairsExperience" name="externalAffairsExperience" rows="3" placeholder="Any previous experience in content creation, promotion, or operations?"></textarea>
+                                <textarea id="relevantSkillsExperience" name="relevantSkillsExperience" rows="3" placeholder="// What skills and experience do you have relevant to External Affairs?"></textarea>
                             </div>
 
                             <div class="form-group">
-                                <label for="externalAffairsLinks">
-                                    <i class="fas fa-chevron-right"></i> SOCIAL_MEDIA_HANDLES
+                                <label for="previousWorkExperience">
+                                    <i class="fas fa-chevron-right"></i> PREVIOUS_WORK_EXPERIENCE
                                 </label>
-                                <input type="text" id="externalAffairsLinks" name="externalAffairsLinks" placeholder="Your social media handles (Instagram, LinkedIn, etc.)">
+                                <textarea id="previousWorkExperience" name="previousWorkExperience" rows="3" placeholder="// Any previous work in content creation, promotion, or operations?"></textarea>
                             </div>
 
                             <div class="form-group">
-                                <label for="externalAffairsSkillsRating">
+                                <label for="workPortfolioLinks">
+                                    <i class="fas fa-chevron-right"></i> WORK_PORTFOLIO_LINKS
+                                </label>
+                                <input type="text" id="workPortfolioLinks" name="workPortfolioLinks" placeholder="Share links to your previous work (if any). If none, type 'None'">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="communicationSkillsRating">
                                     <i class="fas fa-chevron-right"></i> SELF_RATING_COMMUNICATION_SKILLS
                                 </label>
-                                <select id="externalAffairsSkillsRating" name="externalAffairsSkillsRating">
+                                <select id="communicationSkillsRating" name="communicationSkillsRating">
                                     <option value="">SELECT_RATING</option>
                                     <option value="1">1 - Beginner</option>
                                     <option value="2">2 - Basic</option>

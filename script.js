@@ -482,18 +482,20 @@ async function submitApplication() {
         } else if (department === 'photography-videography') {
             formData.photographyQuestions = {
                 whyPhotographyVideography: document.getElementById('whyPhotography').value,
-                photographyVideographySkills: document.getElementById('photographySkills').value,
-                equipmentOwned: document.getElementById('photographyPortfolio').value,
-                portfolioLink: document.getElementById('photographyLinks').value,
+                editingTools: document.getElementById('editingTools').value,
+                shootingDevices: Array.from(document.querySelectorAll('input[name="shootingDevices"]:checked')).map(cb => cb.value),
+                photoVideoWorks: Array.from(document.querySelectorAll('input[name="photoVideoWorks"]:checked')).map(cb => cb.value),
+                portfolioLinks: document.getElementById('portfolioLinks').value,
                 photographyVideographySkillsRating: document.getElementById('photographySkillsRating').value
             };
         } else if (department === 'external-affairs') {
             formData.externalAffairsQuestions = {
                 whyExternalAffairs: document.getElementById('whyExternalAffairs').value,
-                communicationSkills: document.getElementById('externalAffairsSkills').value,
-                previousExperience: document.getElementById('externalAffairsExperience').value,
-                socialMediaHandles: document.getElementById('externalAffairsLinks').value,
-                communicationSkillsRating: document.getElementById('externalAffairsSkillsRating').value
+                externalAffairsRole: Array.from(document.querySelectorAll('input[name="externalAffairsRole"]:checked')).map(cb => cb.value),
+                relevantSkillsExperience: document.getElementById('relevantSkillsExperience').value,
+                previousWorkExperience: document.getElementById('previousWorkExperience').value,
+                workPortfolioLinks: document.getElementById('workPortfolioLinks').value,
+                communicationSkillsRating: document.getElementById('communicationSkillsRating').value
             };
         }
 

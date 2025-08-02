@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SCOPE Club Recruitment - MLRIT</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -73,10 +73,17 @@
                 </div>
 
                 <form id="recruitmentForm" class="recruitment-form">
-                    <!-- Step Indicator -->
+                    <!-- Terminal-Style Progress Bar -->
                     <div class="step-indicator">
-                        <div class="step-dot active" data-step="1"></div>
-                        <div class="step-dot" data-step="2"></div>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <div class="step-labels">
+                                <div class="step-label active" data-step="1">PERSONAL_INFO</div>
+                                <div class="step-label" data-step="2">ACADEMIC_INFO</div>
+                            </div>
+                        </div>
                     </div>
                     
                     <!-- Personal Information -->
@@ -123,6 +130,15 @@
                                     <span class="radio-custom"></span>
                                     <span>Hosteller</span>
                                 </label>
+                            </div>
+                        </div>
+                        
+                        <!-- AI Warning Note -->
+                        <div class="ai-warning">
+                            <div class="warning-content">
+                                <h4>⚠️ AI TOOL WARNING</h4>
+                                <p><strong>Submissions generated with the help of AI tools will be automatically disqualified.</strong></p>
+                                <p>We value authentic, original responses that reflect your genuine skills and personality.</p>
                             </div>
                         </div>
                     </div>

@@ -63,13 +63,20 @@ function showStep(step) {
 
 function updateStepIndicator() {
     console.log('updateStepIndicator called');
-    const dots = document.querySelectorAll('.step-dot');
-    dots.forEach((dot, index) => {
-        dot.classList.remove('active', 'completed');
+    const labels = document.querySelectorAll('.step-label');
+    const progressFill = document.getElementById('progressFill');
+    
+    // Update progress bar fill
+    const progressPercentage = (currentStep / 2) * 100; // 2 total steps
+    progressFill.style.width = progressPercentage + '%';
+    
+    // Update step labels
+    labels.forEach((label, index) => {
+        label.classList.remove('active', 'completed');
         if (index + 1 < currentStep) {
-            dot.classList.add('completed');
+            label.classList.add('completed');
         } else if (index + 1 === currentStep) {
-            dot.classList.add('active');
+            label.classList.add('active');
         }
     });
 }

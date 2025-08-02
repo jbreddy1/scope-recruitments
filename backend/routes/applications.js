@@ -5,6 +5,8 @@ const Application = require('../models/Application');
 // Submit new application
 router.post('/submit', async (req, res) => {
     try {
+        console.log('Received request body:', JSON.stringify(req.body, null, 2));
+        
         const {
             fullName,
             rollNumber,
@@ -15,10 +17,6 @@ router.post('/submit', async (req, res) => {
             cgpa,
             backlogs,
             department,
-            technicalQuestions,
-            graphicQuestions,
-            photographyQuestions,
-            externalAffairsQuestions,
             whyScope,
             whyAwsClub,
             awsClubPreference,
@@ -27,6 +25,12 @@ router.post('/submit', async (req, res) => {
             githubLink,
             linkedinLink
         } = req.body;
+        
+        // Only destructure department questions if they exist
+        const technicalQuestions = req.body.technicalQuestions || null;
+        const graphicQuestions = req.body.graphicQuestions || null;
+        const photographyQuestions = req.body.photographyQuestions || null;
+        const externalAffairsQuestions = req.body.externalAffairsQuestions || null;
 
         // Check if application already exists with same email or roll number
         const existingApplication = await Application.findOne({
@@ -64,7 +68,7 @@ router.post('/submit', async (req, res) => {
         };
 
         // Add department-specific questions based on selection
-        if (department === 'technical') {
+        if (department === 'technical' && technicalQuestions) {
             applicationData.technicalQuestions = {
                 whyTechnicalTeam: technicalQuestions.whyTechnicalTeam,
                 technicalSkills: technicalQuestions.technicalSkills,
@@ -72,7 +76,7 @@ router.post('/submit', async (req, res) => {
                 projectLinks: technicalQuestions.projectLinks,
                 technicalSkillsRating: parseInt(technicalQuestions.technicalSkillsRating)
             };
-        } else if (department === 'graphic-designing') {
+        } else if (department === 'graphic-designing' && graphicQuestions) {
             applicationData.graphicQuestions = {
                 whyGraphicDesigning: graphicQuestions.whyGraphicDesigning,
                 graphicDesigningSkills: graphicQuestions.graphicDesigningSkills,
@@ -80,25 +84,48 @@ router.post('/submit', async (req, res) => {
                 portfolioLink: graphicQuestions.portfolioLink,
                 graphicDesigningSkillsRating: parseInt(graphicQuestions.graphicDesigningSkillsRating)
             };
-        } else if (department === 'photography-videography') {
+        } else if (department === 'photography-videography' && photographyQuestions) {
             applicationData.photographyQuestions = {
                 whyPhotographyVideography: photographyQuestions.whyPhotographyVideography,
                 editingTools: photographyQuestions.editingTools,
                 shootingDevices: photographyQuestions.shootingDevices,
                 photoVideoWorks: photographyQuestions.photoVideoWorks,
-                portfolioLinks: photographyQuestions.portfolioLinks,
+                portfolioLink: photographyQuestions.portfolioLink,
                 photographyVideographySkillsRating: parseInt(photographyQuestions.photographyVideographySkillsRating)
             };
-        } else if (department === 'external-affairs') {
+        } else if (department === 'external-affairs' && externalAffairsQuestions) {
             applicationData.externalAffairsQuestions = {
                 whyExternalAffairs: externalAffairsQuestions.whyExternalAffairs,
                 externalAffairsRole: externalAffairsQuestions.externalAffairsRole,
-                relevantSkillsExperience: externalAffairsQuestions.relevantSkillsExperience,
+                relevantSkills: externalAffairsQuestions.relevantSkills,
                 previousWorkExperience: externalAffairsQuestions.previousWorkExperience,
                 workPortfolioLinks: externalAffairsQuestions.workPortfolioLinks,
-                communicationSkillsRating: externalAffairsQuestions.communicationSkillsRating
+                communicationSkillsRating: parseInt(externalAffairsQuestions.communicationSkillsRating)
             };
         }
+        
+        // Only include the selected department's questions in the final data
+        console.log('Final application data before saving:', JSON.stringify(applicationData, null, 2));
+        
+        // Explicitly exclude unselected department questions
+        if (department !== 'technical') {
+            delete applicationData.technicalQuestions;
+        }
+        if (department !== 'graphic-designing') {
+            delete applicationData.graphicQuestions;
+        }
+        if (department !== 'photography-videography') {
+            delete applicationData.photographyQuestions;
+        }
+        if (department !== 'external-affairs') {
+            delete applicationData.externalAffairsQuestions;
+        }
+        
+        console.log('After deleting unselected departments:');
+        console.log('technicalQuestions:', applicationData.technicalQuestions);
+        console.log('graphicQuestions:', applicationData.graphicQuestions);
+        console.log('photographyQuestions:', applicationData.photographyQuestions);
+        console.log('externalAffairsQuestions:', applicationData.externalAffairsQuestions);
 
         // Create and save the application
         const application = new Application(applicationData);

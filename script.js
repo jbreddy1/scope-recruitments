@@ -108,6 +108,28 @@ function validateCurrentStep() {
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM Content Loaded');
     
+    // Ensure form section icons are always visible
+    function ensureIconsVisible() {
+        const formSectionIcons = document.querySelectorAll('.form-section h3 i');
+        formSectionIcons.forEach(icon => {
+            icon.style.visibility = 'visible';
+            icon.style.opacity = '1';
+            icon.style.display = 'inline-block';
+        });
+    }
+    
+    // Run initially
+    ensureIconsVisible();
+    
+    // Run on any DOM changes
+    const observer = new MutationObserver(ensureIconsVisible);
+    observer.observe(document.body, { 
+        childList: true, 
+        subtree: true, 
+        attributes: true,
+        attributeFilter: ['style', 'class']
+    });
+    
     // Initialize recruitment button
     const initializeBtn = document.getElementById('initializeBtn');
     if (initializeBtn) {
@@ -192,12 +214,45 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Form validation
 function validateForm() {
+    console.log('validateForm called');
     let isValid = true;
     const form = document.getElementById('recruitmentForm');
-    const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
     
-    inputs.forEach(input => {
+    // Get the selected department
+    const deptSelect = document.getElementById('department');
+    const selectedDepartment = deptSelect ? deptSelect.value : '';
+    console.log('Selected department:', selectedDepartment);
+    
+    // Only validate fields that are visible and belong to the current department
+    const allInputs = form.querySelectorAll('input, select, textarea');
+    const visibleInputs = Array.from(allInputs).filter(input => {
+        // Check if the input is visible
+        const isVisible = input.offsetParent !== null && input.style.display !== 'none';
+        
+        // Check if it's a department-specific field
+        const isDepartmentSpecific = input.closest('.department-questions');
+        
+        // If it's department-specific, only validate if it belongs to the selected department
+        if (isDepartmentSpecific) {
+            const departmentContainer = input.closest('.department-questions');
+            const isCorrectDepartment = departmentContainer && 
+                ((selectedDepartment === 'technical' && departmentContainer.id === 'technical-questions') ||
+                 (selectedDepartment === 'graphic-designing' && departmentContainer.id === 'graphic-questions') ||
+                 (selectedDepartment === 'photography-videography' && departmentContainer.id === 'photography-questions') ||
+                 (selectedDepartment === 'external-affairs' && departmentContainer.id === 'external-affairs-questions'));
+            return isVisible && isCorrectDepartment;
+        }
+        
+        // For non-department-specific fields, validate if visible and required
+        return isVisible && input.hasAttribute('required');
+    });
+    
+    console.log('Found visible inputs to validate:', visibleInputs.length);
+    
+    visibleInputs.forEach(input => {
+        console.log('Validating input:', input.id, input.name, input.value);
         if (!validateField(input)) {
+            console.log('Field validation failed:', input.id);
             isValid = false;
         }
     });
@@ -288,44 +343,37 @@ function validateForm() {
         }
     }
 
-    // Department-specific validation
-    const departmentSelect = document.getElementById('department');
-    if (departmentSelect.value === 'technical') {
-        const technicalFields = ['whyTechnical', 'technicalSkills', 'projectsWorkedOn', 'projectLinks', 'technicalSkillsRating'];
-        technicalFields.forEach(fieldId => {
-            const field = document.getElementById(fieldId);
-            if (field && !field.value.trim()) {
-                showFieldError(field, 'This field is required for Technical department');
+    // Additional validation for checkbox groups
+    if (selectedDepartment === 'photography-videography') {
+        // Check if at least one shooting device is selected
+        const shootingDevices = document.querySelectorAll('input[name="shootingDevices"]:checked');
+        if (shootingDevices.length === 0) {
+            const shootingDevicesContainer = document.querySelector('input[name="shootingDevices"]');
+            if (shootingDevicesContainer && shootingDevicesContainer.closest('.department-questions').style.display !== 'none') {
+                showFieldError(shootingDevicesContainer, 'Please select at least one shooting device');
                 isValid = false;
             }
-        });
-    } else if (departmentSelect.value === 'graphic-designing') {
-        const graphicFields = ['whyGraphic', 'graphicSkills', 'graphicPortfolio', 'graphicLinks', 'graphicSkillsRating'];
-        graphicFields.forEach(fieldId => {
-            const field = document.getElementById(fieldId);
-            if (field && !field.value.trim()) {
-                showFieldError(field, 'This field is required for Graphic Designing department');
+        }
+        
+        // Check if at least one photo/video work is selected
+        const photoVideoWorks = document.querySelectorAll('input[name="photoVideoWorks"]:checked');
+        if (photoVideoWorks.length === 0) {
+            const photoVideoWorksContainer = document.querySelector('input[name="photoVideoWorks"]');
+            if (photoVideoWorksContainer && photoVideoWorksContainer.closest('.department-questions').style.display !== 'none') {
+                showFieldError(photoVideoWorksContainer, 'Please select at least one photo/video work type');
                 isValid = false;
             }
-        });
-    } else if (departmentSelect.value === 'photography-videography') {
-        const photographyFields = ['whyPhotography', 'photographySkills', 'photographyPortfolio', 'photographyLinks', 'photographySkillsRating'];
-        photographyFields.forEach(fieldId => {
-            const field = document.getElementById(fieldId);
-            if (field && !field.value.trim()) {
-                showFieldError(field, 'This field is required for Photography & Videography department');
+        }
+    } else if (selectedDepartment === 'external-affairs') {
+        // Check if at least one external affairs role is selected
+        const externalAffairsRole = document.querySelectorAll('input[name="externalAffairsRole"]:checked');
+        if (externalAffairsRole.length === 0) {
+            const externalAffairsRoleContainer = document.querySelector('input[name="externalAffairsRole"]');
+            if (externalAffairsRoleContainer && externalAffairsRoleContainer.closest('.department-questions').style.display !== 'none') {
+                showFieldError(externalAffairsRoleContainer, 'Please select at least one external affairs role');
                 isValid = false;
             }
-        });
-    } else if (departmentSelect.value === 'external-affairs') {
-        const externalAffairsFields = ['whyExternalAffairs', 'externalAffairsSkills', 'externalAffairsExperience', 'externalAffairsLinks', 'externalAffairsSkillsRating'];
-        externalAffairsFields.forEach(fieldId => {
-            const field = document.getElementById(fieldId);
-            if (field && !field.value.trim()) {
-                showFieldError(field, 'This field is required for External Affairs department');
-                isValid = false;
-            }
-        });
+        }
     }
 
     return isValid;
@@ -480,26 +528,45 @@ async function submitApplication() {
                 graphicDesigningSkillsRating: document.getElementById('graphicSkillsRating').value
             };
         } else if (department === 'photography-videography') {
+            // Collect checkbox values for shooting devices
+            const shootingDevices = [];
+            document.querySelectorAll('input[name="shootingDevices"]:checked').forEach(checkbox => {
+                shootingDevices.push(checkbox.value);
+            });
+            
+            // Collect checkbox values for photo/video works
+            const photoVideoWorks = [];
+            document.querySelectorAll('input[name="photoVideoWorks"]:checked').forEach(checkbox => {
+                photoVideoWorks.push(checkbox.value);
+            });
+            
             formData.photographyQuestions = {
                 whyPhotographyVideography: document.getElementById('whyPhotography').value,
                 editingTools: document.getElementById('editingTools').value,
-                shootingDevices: Array.from(document.querySelectorAll('input[name="shootingDevices"]:checked')).map(cb => cb.value),
-                photoVideoWorks: Array.from(document.querySelectorAll('input[name="photoVideoWorks"]:checked')).map(cb => cb.value),
-                portfolioLinks: document.getElementById('portfolioLinks').value,
+                shootingDevices: shootingDevices,
+                photoVideoWorks: photoVideoWorks,
+                portfolioLink: document.getElementById('photographyLinks').value,
                 photographyVideographySkillsRating: document.getElementById('photographySkillsRating').value
             };
         } else if (department === 'external-affairs') {
+            // Collect checkbox values for external affairs role
+            const externalAffairsRole = [];
+            document.querySelectorAll('input[name="externalAffairsRole"]:checked').forEach(checkbox => {
+                externalAffairsRole.push(checkbox.value);
+            });
+            
             formData.externalAffairsQuestions = {
                 whyExternalAffairs: document.getElementById('whyExternalAffairs').value,
-                externalAffairsRole: Array.from(document.querySelectorAll('input[name="externalAffairsRole"]:checked')).map(cb => cb.value),
-                relevantSkillsExperience: document.getElementById('relevantSkillsExperience').value,
+                externalAffairsRole: externalAffairsRole,
+                relevantSkills: document.getElementById('relevantSkills').value,
                 previousWorkExperience: document.getElementById('previousWorkExperience').value,
                 workPortfolioLinks: document.getElementById('workPortfolioLinks').value,
-                communicationSkillsRating: document.getElementById('communicationSkillsRating').value
+                communicationSkillsRating: document.getElementById('externalAffairsSkillsRating').value
             };
         }
 
         console.log('Sending data to backend...');
+        console.log('Form data being sent:', JSON.stringify(formData, null, 2));
 
         // Send data to backend
         const response = await fetch('/api/applications/submit', {

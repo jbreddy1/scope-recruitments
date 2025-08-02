@@ -81,27 +81,27 @@ const applicationSchema = new mongoose.Schema({
         trim: true
     },
 
-    // Department-specific questions
+    // Department-specific questions (only created for selected department)
     technicalQuestions: {
         whyTechnicalTeam: {
             type: String,
-            required: function() { return this.department === 'Technical'; }
+            required: function() { return this.department === 'technical'; }
         },
         technicalSkills: {
             type: String,
-            required: function() { return this.department === 'Technical'; }
+            required: function() { return this.department === 'technical'; }
         },
         projectsWorkedOn: {
             type: String,
-            required: function() { return this.department === 'Technical'; }
+            required: function() { return this.department === 'technical'; }
         },
         projectLinks: {
             type: String,
-            required: function() { return this.department === 'Technical'; }
+            required: function() { return this.department === 'technical'; }
         },
         technicalSkillsRating: {
             type: Number,
-            required: function() { return this.department === 'Technical'; },
+            required: function() { return this.department === 'technical'; },
             min: [1, 'Rating must be at least 1'],
             max: [10, 'Rating cannot exceed 10']
         }
@@ -110,23 +110,23 @@ const applicationSchema = new mongoose.Schema({
     graphicQuestions: {
         whyGraphicDesigning: {
             type: String,
-            required: function() { return this.department === 'Graphic Designing'; }
+            required: function() { return this.department === 'graphic-designing'; }
         },
         graphicDesigningSkills: {
             type: String,
-            required: function() { return this.department === 'Graphic Designing'; }
+            required: function() { return this.department === 'graphic-designing'; }
         },
         toolsUsed: {
             type: String,
-            required: function() { return this.department === 'Graphic Designing'; }
+            required: function() { return this.department === 'graphic-designing'; }
         },
         portfolioLink: {
             type: String,
-            required: function() { return this.department === 'Graphic Designing'; }
+            required: function() { return this.department === 'graphic-designing'; }
         },
         graphicDesigningSkillsRating: {
             type: Number,
-            required: function() { return this.department === 'Graphic Designing'; },
+            required: function() { return this.department === 'graphic-designing'; },
             min: [1, 'Rating must be at least 1'],
             max: [10, 'Rating cannot exceed 10']
         }
@@ -149,7 +149,7 @@ const applicationSchema = new mongoose.Schema({
             type: [String],
             required: function() { return this.department === 'photography-videography'; }
         },
-        portfolioLinks: {
+        portfolioLink: {
             type: String,
             required: function() { return this.department === 'photography-videography'; }
         },
@@ -157,7 +157,7 @@ const applicationSchema = new mongoose.Schema({
             type: Number,
             required: function() { return this.department === 'photography-videography'; },
             min: [1, 'Rating must be at least 1'],
-            max: [5, 'Rating cannot exceed 5']
+            max: [10, 'Rating cannot exceed 10']
         }
     },
 
@@ -170,7 +170,7 @@ const applicationSchema = new mongoose.Schema({
             type: [String],
             required: function() { return this.department === 'external-affairs'; }
         },
-        relevantSkillsExperience: {
+        relevantSkills: {
             type: String,
             required: function() { return this.department === 'external-affairs'; }
         },
@@ -183,9 +183,10 @@ const applicationSchema = new mongoose.Schema({
             required: function() { return this.department === 'external-affairs'; }
         },
         communicationSkillsRating: {
-            type: String,
+            type: Number,
             required: function() { return this.department === 'external-affairs'; },
-            enum: ['1', '2', '3', '4', '5']
+            min: [1, 'Rating must be at least 1'],
+            max: [10, 'Rating cannot exceed 10']
         }
     },
 
@@ -258,18 +259,32 @@ applicationSchema.pre('save', function(next) {
             !this.photographyQuestions.editingTools || 
             !this.photographyQuestions.shootingDevices || 
             !this.photographyQuestions.photoVideoWorks || 
-            !this.photographyQuestions.portfolioLinks || 
+            !this.photographyQuestions.portfolioLink || 
             !this.photographyQuestions.photographyVideographySkillsRating) {
             return next(new Error('All photography & videography questions are required'));
         }
+        
+        // Check if shootingDevices and photoVideoWorks arrays have at least one element
+        if (!this.photographyQuestions.shootingDevices || this.photographyQuestions.shootingDevices.length === 0) {
+            return next(new Error('At least one shooting device must be selected'));
+        }
+        
+        if (!this.photographyQuestions.photoVideoWorks || this.photographyQuestions.photoVideoWorks.length === 0) {
+            return next(new Error('At least one photo/video work type must be selected'));
+        }
     } else if (dept === 'external-affairs') {
-        if (!this.externalAffairsQuestions.whyExternalAffairs || 
-            !this.externalAffairsQuestions.externalAffairsRole || 
-            !this.externalAffairsQuestions.relevantSkillsExperience || 
-            !this.externalAffairsQuestions.previousWorkExperience || 
-            !this.externalAffairsQuestions.workPortfolioLinks || 
-            !this.externalAffairsQuestions.communicationSkillsRating) {
+        if (!this.externalAffairsQuestions?.whyExternalAffairs || 
+            !this.externalAffairsQuestions?.externalAffairsRole || 
+            !this.externalAffairsQuestions?.relevantSkills || 
+            !this.externalAffairsQuestions?.previousWorkExperience || 
+            !this.externalAffairsQuestions?.workPortfolioLinks || 
+            !this.externalAffairsQuestions?.communicationSkillsRating) {
             return next(new Error('All external affairs questions are required'));
+        }
+        
+        // Check if externalAffairsRole array has at least one element
+        if (!this.externalAffairsQuestions.externalAffairsRole || this.externalAffairsQuestions.externalAffairsRole.length === 0) {
+            return next(new Error('At least one external affairs role must be selected'));
         }
     }
     

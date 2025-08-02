@@ -147,16 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (initializeBtn) {
         initializeBtn.addEventListener('click', function() {
             console.log('Initialize recruitment button clicked');
-            const landingSection = document.getElementById('landingSection');
-            const applicationForm = document.getElementById('applicationForm');
-            
-            if (landingSection && applicationForm) {
-                landingSection.style.display = 'none';
-                applicationForm.style.display = 'block';
-                console.log('Switched from landing to application form');
-            } else {
-                console.error('Landing section or application form not found');
-            }
+            initializeRecruitment();
         });
         console.log('Initialize button event listener attached');
     }

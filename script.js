@@ -14,6 +14,11 @@ function initializeRecruitment() {
     if (landingSection && applicationForm) {
         landingSection.style.display = 'none';
         applicationForm.style.display = 'block';
+        // Scroll to top of the form
+        document.querySelector('.form-container').scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+        });
         console.log('Switched from landing to application form');
     } else {
         console.error('Landing section or application form not found');
@@ -176,6 +181,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 currentStep++;
                 showStep(currentStep);
                 updateStepIndicator();
+                // Scroll to top of the form
+                document.querySelector('.form-container').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
             }
         }
     });
@@ -186,6 +196,11 @@ document.addEventListener('DOMContentLoaded', function() {
             currentStep--;
             showStep(currentStep);
             updateStepIndicator();
+            // Scroll to top of the form
+            document.querySelector('.form-container').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
         }
     });
 
